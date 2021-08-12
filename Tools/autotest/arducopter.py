@@ -157,6 +157,32 @@ class AutoTestCopter(AutoTest):
         self.hover()
         self.progress("TAKEOFF COMPLETE")
 
+    def rd_attack_start(self):
+        self.progress("ROCKING DRONE ATTACK START")
+        self.set_parameter("RD_ATTACK", 1)
+
+    def rd_attack_stop(self):
+        self.progress("ROCKING DRONE ATTACK STOP")
+        self.set_parameter("RD_ATTACK", 0)
+
+    def rd_attack_get_freq(self):
+        attack_freq = self.get_parameter("RD_ATTACK_FREQ")
+        self.progress("CURRENT ATTACK FREQUENCY: %.2f" % attack_freq)
+
+    def rd_attack_set_freq(self, attack_freq):
+        self.set_parameter("RD_ATTACK_FREQ", attack_freq)
+        current_freq = self.get_parameter("RD_ATTACK_FREQ")
+        self.progress("CHANGED ATTACK FREQUENCY: %.2f" % current_freq)
+
+    def rd_attack_get_alt(self):
+        attack_alt = self.get_parameter("RD_ATTACK_ALT")
+        self.progress("CURRENT ATTACK ALTITUDE: %.2f" % attack_alt)
+
+    def rd_attack_set_alt(self, attack_alt):
+        self.set_parameter("RD_ATTACK_ALT", attack_alt)
+        current_alt = self.get_parameter("RD_ATTACK_ALT")
+        self.progress("CHANGED ATTACK ALTITUDE: %.2f" % current_alt)
+
     def wait_for_alt(self, alt_min=30, timeout=30, max_err=5):
         """Wait for minimum altitude to be reached."""
         self.wait_altitude(alt_min - 1,

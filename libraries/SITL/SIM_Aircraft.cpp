@@ -21,6 +21,8 @@
 #include <stdio.h>
 #include <sys/time.h>
 #include <unistd.h>
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 
 #if defined(__CYGWIN__) || defined(__CYGWIN64__)
@@ -304,6 +306,23 @@ void Aircraft::add_noise(float throttle)
     gyro += Vector3f(rand_normal(0, 1),
                      rand_normal(0, 1),
                      rand_normal(0, 1)) * gyro_noise * fabsf(throttle);
+    enum ap_var_type ptype;
+    attack_flag = (AP_Int8 *)AP_Param::find("RD_ATTACK", &ptype);
+    attack_freq_roll = (AP_Float *)AP_Param::find("RD_ATTACK_FREQ_ROLL", &ptype);
+    attack_freq_pitch = (AP_Float *)AP_Param::find("RD_ATTACK_FREQ_PITCH", &ptype);
+    attack_freq_yaw = (AP_Float *)AP_Param::find("RD_ATTACK_FREQ_YAW", &ptype);
+    attack_alt_roll = (AP_Float *)AP_Param::find("RD_ATTACK_ALT_ROLL", &ptype);
+    attack_alt_pitch = (AP_Float *)AP_Param::find("RD_ATTACK_ALT_PITCH", &ptype);
+    attack_alt_yaw = (AP_Float *)AP_Param::find("RD_ATTACK_ALT_YAW", &ptype);
+    if ((attack_flag != nullptr) && 
+    (attack_freq_roll != nullptr) && (attack_freq_pitch != nullptr) && (attack_freq_yaw != nullptr) &&
+    (attack_alt_roll != nullptr) && (attack_alt_pitch != nullptr) && (attack_alt_yaw != nullptr)) {
+        if (*attack_flag) {
+            gyro += Vector3f((*attack_alt_roll) * sin(2 * M_PI * (*attack_freq_roll) * frame_time_us),
+            (*attack_alt_pitch) * sin(2 * M_PI * (*attack_freq_pitch) * frame_time_us),
+            (*attack_alt_yaw) * sin(2 * M_PI * (*attack_freq_yaw) * frame_time_us))
+        }
+    }
     accel_body += Vector3f(rand_normal(0, 1),
                            rand_normal(0, 1),
                            rand_normal(0, 1)) * accel_noise * fabsf(throttle);

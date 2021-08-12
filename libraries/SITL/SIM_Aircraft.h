@@ -238,6 +238,15 @@ protected:
     AP_Float* custom_pitch;
     AP_Float* custom_yaw;
 
+    // for ROKCING DRONE attack
+    AP_Int8 *attack_flag;
+    AP_Float* attack_freq_roll;
+    AP_Float* attack_freq_pitch;
+    AP_Float* attack_freq_yaw;
+    AP_Float* attack_alt_roll;
+    AP_Float* attack_alt_pitch;
+    AP_Float* attack_alt_yaw;
+
     enum GroundBehaviour {
         GROUND_BEHAVIOR_NONE = 0,
         GROUND_BEHAVIOR_NO_MOVEMENT,
