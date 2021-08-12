@@ -165,23 +165,59 @@ class AutoTestCopter(AutoTest):
         self.progress("ROCKING DRONE ATTACK STOP")
         self.set_parameter("RD_ATTACK", 0)
 
-    def rd_attack_get_freq(self):
-        attack_freq = self.get_parameter("RD_ATTACK_FREQ")
-        self.progress("CURRENT ATTACK FREQUENCY: %.2f" % attack_freq)
+    def rd_attack_get_freq_roll(self):
+        attack_freq = self.get_parameter("RD_ATTACK_FREQ_ROLL")
+        self.progress("CURRENT ROLL ATTACK FREQUENCY: %.2f" % attack_freq)
 
-    def rd_attack_set_freq(self, attack_freq):
-        self.set_parameter("RD_ATTACK_FREQ", attack_freq)
-        current_freq = self.get_parameter("RD_ATTACK_FREQ")
-        self.progress("CHANGED ATTACK FREQUENCY: %.2f" % current_freq)
+    def rd_attack_set_freq_roll(self, attack_freq):
+        self.set_parameter("RD_ATTACK_FREQ_ROLL", attack_freq)
+        current_freq = self.get_parameter("RD_ATTACK_FREQ_ROLL")
+        self.progress("CHANGED ROLL ATTACK FREQUENCY: %.2f" % current_freq)
 
-    def rd_attack_get_alt(self):
-        attack_alt = self.get_parameter("RD_ATTACK_ALT")
-        self.progress("CURRENT ATTACK ALTITUDE: %.2f" % attack_alt)
+    def rd_attack_get_freq_pitch(self):
+        attack_freq = self.get_parameter("RD_ATTACK_FREQ_PITCH")
+        self.progress("CURRENT PITCH ATTACK FREQUENCY: %.2f" % attack_freq)
 
-    def rd_attack_set_alt(self, attack_alt):
-        self.set_parameter("RD_ATTACK_ALT", attack_alt)
-        current_alt = self.get_parameter("RD_ATTACK_ALT")
-        self.progress("CHANGED ATTACK ALTITUDE: %.2f" % current_alt)
+    def rd_attack_set_freq_pitch(self, attack_freq):
+        self.set_parameter("RD_ATTACK_FREQ_PITCH", attack_freq)
+        current_freq = self.get_parameter("RD_ATTACK_FREQ_PITCH")
+        self.progress("CHANGED PITCH ATTACK FREQUENCY: %.2f" % current_freq)
+
+    def rd_attack_get_freq_yaw(self):
+        attack_freq = self.get_parameter("RD_ATTACK_FREQ_YAW")
+        self.progress("CURRENT YAW ATTACK FREQUENCY: %.2f" % attack_freq)
+
+    def rd_attack_set_freq_yaw(self, attack_freq):
+        self.set_parameter("RD_ATTACK_FREQ_YAW", attack_freq)
+        current_freq = self.get_parameter("RD_ATTACK_FREQ_YAW")
+        self.progress("CHANGED YAW ATTACK FREQUENCY: %.2f" % current_freq)
+
+    def rd_attack_get_alt_roll(self):
+        attack_alt = self.get_parameter("RD_ATTACK_ALT_ROLL")
+        self.progress("CURRENT ROLL ATTACK ALTITUDE: %.2f" % attack_alt)
+
+    def rd_attack_set_alt_roll(self, attack_alt):
+        self.set_parameter("RD_ATTACK_ALT_ROLL", attack_alt)
+        current_alt = self.get_parameter("RD_ATTACK_ALT_ROLL")
+        self.progress("CHANGED ROLL ATTACK ALTITUDE: %.2f" % current_alt)
+
+    def rd_attack_get_alt_pitch(self):
+        attack_alt = self.get_parameter("RD_ATTACK_ALT_PITCH")
+        self.progress("CURRENT PITCH ATTACK ALTITUDE: %.2f" % attack_alt)
+
+    def rd_attack_set_alt_pitch(self, attack_alt):
+        self.set_parameter("RD_ATTACK_ALT_PITCH", attack_alt)
+        current_alt = self.get_parameter("RD_ATTACK_ALT_PITCH")
+        self.progress("CHANGED PITCH ATTACK ALTITUDE: %.2f" % current_alt)
+
+    def rd_attack_get_alt_yaw(self):
+        attack_alt = self.get_parameter("RD_ATTACK_ALT_YAW")
+        self.progress("CURRENT YAW ATTACK ALTITUDE: %.2f" % attack_alt)
+
+    def rd_attack_set_alt_yaw(self, attack_alt):
+        self.set_parameter("RD_ATTACK_ALT_YAW", attack_alt)
+        current_alt = self.get_parameter("RD_ATTACK_ALT_YAW")
+        self.progress("CHANGED YAW ATTACK ALTITUDE: %.2f" % current_alt)
 
     def wait_for_alt(self, alt_min=30, timeout=30, max_err=5):
         """Wait for minimum altitude to be reached."""
