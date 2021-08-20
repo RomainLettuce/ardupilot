@@ -76,6 +76,7 @@ class AutoTestCopter(AutoTest):
         return SITL_START_LOCATION
 
     def mavproxy_options(self):
+        self.use_map = True
         ret = super(AutoTestCopter, self).mavproxy_options()
         if self.frame != 'heli':
             ret.append('--quadcopter')
@@ -157,67 +158,67 @@ class AutoTestCopter(AutoTest):
         self.hover()
         self.progress("TAKEOFF COMPLETE")
 
-    def rd_attack_start(self):
-        self.progress("ROCKING DRONE ATTACK START")
-        self.set_parameter("RD_ATTACK", 1)
+    #def rd_attack_start(self):
+    #    self.progress("ROCKING DRONE ATTACK START")
+    #    self.set_parameter("RD_ATTACK", 1)
 
-    def rd_attack_stop(self):
-        self.progress("ROCKING DRONE ATTACK STOP")
-        self.set_parameter("RD_ATTACK", 0)
+    #def rd_attack_stop(self):
+    #    self.progress("ROCKING DRONE ATTACK STOP")
+    #    self.set_parameter("RD_ATTACK", 0)
 
-    def rd_attack_get_freq_roll(self):
-        attack_freq = self.get_parameter("RD_ATTACK_FREQ_ROLL")
-        self.progress("CURRENT ROLL ATTACK FREQUENCY: %.2f" % attack_freq)
+    #def rd_attack_get_freq_roll(self):
+    #    attack_freq = self.get_parameter("RD_ATTACK_FREQ_ROLL")
+    #    self.progress("CURRENT ROLL ATTACK FREQUENCY: %.2f" % attack_freq)
 
-    def rd_attack_set_freq_roll(self, attack_freq):
-        self.set_parameter("RD_ATTACK_FREQ_ROLL", attack_freq)
-        current_freq = self.get_parameter("RD_ATTACK_FREQ_ROLL")
-        self.progress("CHANGED ROLL ATTACK FREQUENCY: %.2f" % current_freq)
+    #def rd_attack_set_freq_roll(self, attack_freq):
+    #    self.set_parameter("RD_ATTACK_FREQ_ROLL", attack_freq)
+    #    current_freq = self.get_parameter("RD_ATTACK_FREQ_ROLL")
+    #    self.progress("CHANGED ROLL ATTACK FREQUENCY: %.2f" % current_freq)
 
-    def rd_attack_get_freq_pitch(self):
-        attack_freq = self.get_parameter("RD_ATTACK_FREQ_PITCH")
-        self.progress("CURRENT PITCH ATTACK FREQUENCY: %.2f" % attack_freq)
+    #def rd_attack_get_freq_pitch(self):
+    #    attack_freq = self.get_parameter("RD_ATTACK_FREQ_PITCH")
+    #    self.progress("CURRENT PITCH ATTACK FREQUENCY: %.2f" % attack_freq)
 
-    def rd_attack_set_freq_pitch(self, attack_freq):
-        self.set_parameter("RD_ATTACK_FREQ_PITCH", attack_freq)
-        current_freq = self.get_parameter("RD_ATTACK_FREQ_PITCH")
-        self.progress("CHANGED PITCH ATTACK FREQUENCY: %.2f" % current_freq)
+    #def rd_attack_set_freq_pitch(self, attack_freq):
+    #    self.set_parameter("RD_ATTACK_FREQ_PITCH", attack_freq)
+    #    current_freq = self.get_parameter("RD_ATTACK_FREQ_PITCH")
+    #    self.progress("CHANGED PITCH ATTACK FREQUENCY: %.2f" % current_freq)
 
-    def rd_attack_get_freq_yaw(self):
-        attack_freq = self.get_parameter("RD_ATTACK_FREQ_YAW")
-        self.progress("CURRENT YAW ATTACK FREQUENCY: %.2f" % attack_freq)
+    #def rd_attack_get_freq_yaw(self):
+    #    attack_freq = self.get_parameter("RD_ATTACK_FREQ_YAW")
+    #    self.progress("CURRENT YAW ATTACK FREQUENCY: %.2f" % attack_freq)
 
-    def rd_attack_set_freq_yaw(self, attack_freq):
-        self.set_parameter("RD_ATTACK_FREQ_YAW", attack_freq)
-        current_freq = self.get_parameter("RD_ATTACK_FREQ_YAW")
-        self.progress("CHANGED YAW ATTACK FREQUENCY: %.2f" % current_freq)
+    #def rd_attack_set_freq_yaw(self, attack_freq):
+    #    self.set_parameter("RD_ATTACK_FREQ_YAW", attack_freq)
+    #    current_freq = self.get_parameter("RD_ATTACK_FREQ_YAW")
+    #    self.progress("CHANGED YAW ATTACK FREQUENCY: %.2f" % current_freq)
 
-    def rd_attack_get_alt_roll(self):
-        attack_alt = self.get_parameter("RD_ATTACK_ALT_ROLL")
-        self.progress("CURRENT ROLL ATTACK ALTITUDE: %.2f" % attack_alt)
+    #def rd_attack_get_alt_roll(self):
+    #    attack_alt = self.get_parameter("RD_ATTACK_ALT_ROLL")
+    #    self.progress("CURRENT ROLL ATTACK ALTITUDE: %.2f" % attack_alt)
 
-    def rd_attack_set_alt_roll(self, attack_alt):
-        self.set_parameter("RD_ATTACK_ALT_ROLL", attack_alt)
-        current_alt = self.get_parameter("RD_ATTACK_ALT_ROLL")
-        self.progress("CHANGED ROLL ATTACK ALTITUDE: %.2f" % current_alt)
+    #def rd_attack_set_alt_roll(self, attack_alt):
+    #    self.set_parameter("RD_ATTACK_ALT_ROLL", attack_alt)
+    #    current_alt = self.get_parameter("RD_ATTACK_ALT_ROLL")
+    #    self.progress("CHANGED ROLL ATTACK ALTITUDE: %.2f" % current_alt)
 
-    def rd_attack_get_alt_pitch(self):
-        attack_alt = self.get_parameter("RD_ATTACK_ALT_PITCH")
-        self.progress("CURRENT PITCH ATTACK ALTITUDE: %.2f" % attack_alt)
+    #def rd_attack_get_alt_pitch(self):
+    #    attack_alt = self.get_parameter("RD_ATTACK_ALT_PITCH")
+    #    self.progress("CURRENT PITCH ATTACK ALTITUDE: %.2f" % attack_alt)
 
-    def rd_attack_set_alt_pitch(self, attack_alt):
-        self.set_parameter("RD_ATTACK_ALT_PITCH", attack_alt)
-        current_alt = self.get_parameter("RD_ATTACK_ALT_PITCH")
-        self.progress("CHANGED PITCH ATTACK ALTITUDE: %.2f" % current_alt)
+    #def rd_attack_set_alt_pitch(self, attack_alt):
+    #    self.set_parameter("RD_ATTACK_ALT_PITCH", attack_alt)
+    #    current_alt = self.get_parameter("RD_ATTACK_ALT_PITCH")
+    #    self.progress("CHANGED PITCH ATTACK ALTITUDE: %.2f" % current_alt)
 
-    def rd_attack_get_alt_yaw(self):
-        attack_alt = self.get_parameter("RD_ATTACK_ALT_YAW")
-        self.progress("CURRENT YAW ATTACK ALTITUDE: %.2f" % attack_alt)
+    #def rd_attack_get_alt_yaw(self):
+    #    attack_alt = self.get_parameter("RD_ATTACK_ALT_YAW")
+    #    self.progress("CURRENT YAW ATTACK ALTITUDE: %.2f" % attack_alt)
 
-    def rd_attack_set_alt_yaw(self, attack_alt):
-        self.set_parameter("RD_ATTACK_ALT_YAW", attack_alt)
-        current_alt = self.get_parameter("RD_ATTACK_ALT_YAW")
-        self.progress("CHANGED YAW ATTACK ALTITUDE: %.2f" % current_alt)
+    #def rd_attack_set_alt_yaw(self, attack_alt):
+    #    self.set_parameter("RD_ATTACK_ALT_YAW", attack_alt)
+    #    current_alt = self.get_parameter("RD_ATTACK_ALT_YAW")
+    #    self.progress("CHANGED YAW ATTACK ALTITUDE: %.2f" % current_alt)
 
     def wait_for_alt(self, alt_min=30, timeout=30, max_err=5):
         """Wait for minimum altitude to be reached."""
@@ -4546,6 +4547,20 @@ class AutoTestCopter(AutoTest):
                                        (tdelta, max_good_tdelta))
         self.progress("Vehicle returned")
 
+    def check_falldown(self):
+        m = self.mav.recv_match(type='SIMSTATE', blocking=True)
+        m2 = self.mav.recv_match(type='GLOBAL_POSITION_INT', blocking=True)
+        if (m2.relative_alt < 10000.0):
+            return True
+        else:
+            return False
+
+    def is_abnormal(self):
+        if self.check_falldown():
+            return True
+        else:
+            return False
+
     def hover_and_check_matched_frequency_with_fft(self, dblevel=-15, minhz=200, maxhz=300, peakhz=None, reverse=None):
         # find a motor peak
         self.takeoff(10, mode="ALT_HOLD")
@@ -6879,6 +6894,83 @@ class AutoTestCopter(AutoTest):
 
         return ret
 
+    def check_hover(self,
+                    timeout=600):
+        tstart = self.get_sim_time()
+        tflag = tstart
+        last_status = 1
+
+        self.mavproxy.send('param set RD_ATTACK 1\n')
+
+        while self.get_sim_time_cached() < tstart + timeout:
+            if self.is_abnormal():
+                self.progress("Rocking Drone Attack Success")
+                return True
+            if (self.get_sim_time_cached() - tflag) % 10 == 0:
+                if last_status == 0:
+                    self.mavproxy.send('param set RD_ATTACK 1\n')
+                    last_status = 1
+                else:
+                    self.mavproxy.send('param set RD_ATTACK 0\n')
+                    last_status = 0
+        if last_status == 1:
+            self.mavproxy.send('param set RD_ATTACK 0\n')
+        return False
+
+    def fly_rocking_drone(self):
+        self.progress('Start Rocking Drone attack')
+
+        self.context_push()
+
+        res_fname = 'results/rocking_drone.txt'
+        out = open(res_fname, 'w')
+        wp_fname = 'CMAC-circuit.txt'
+        MAX_COUNT = 20
+        attack_amp = 0
+        attack_freq = 100
+
+        self.mavproxy.send('param set RD_ATTACK 0\n')
+
+        num_wp = self.load_mission(wp_fname)
+
+        for count in range(MAX_COUNT):
+            self.assert_vehicle_location_is_at_startup_location()
+
+            self.takeoff(40)
+            self.mavproxy.send('param set RD_ATTACK_ALT_YAW %f\n' % attack_amp)
+            self.mavproxy.send('param set RD_ATTACK_FREQ_YAW %f\n' % attack_freq)
+            
+            crashed = self.check_hover()
+
+            if crashed:
+                msg = 'Crashed at AMP: %f, FREQ: %f\n' % (attack_amp, attack_freq)
+                out.write(msg)
+                attack_amp += 20 
+
+            else:
+                msg = 'Not crashed at AMP: %f, FREQ: %f\n' % (attack_amp,
+                                                            attack_freq)
+                out.write(msg)
+                attack_amp += 20
+                if attack_amp > 200:
+                    attack_amp = 200
+                    attack_freq += 5.0#0.1
+
+            self.progress(msg)
+            #self.progress(msg, res_fname)
+            #attack_amp += 0.01
+            #if attack_amp > 0.15:
+            #    attack_freq += 0.1
+
+            self.zero_throttle()
+            self.disarm_vehicle(force=True)
+            self.mavproxy.send('param set SIM_ATTACK_TRG 0\n')
+            self.reboot_sitl()
+            if attack_freq > 200:
+                break
+        out.close()
+        self.progress("RVFuzzer test is done.")
+
     def upload_simple_relhome_mission(self, items, target_system=1, target_component=1):
         mission = self.create_simple_relhome_mission(
             items,
@@ -7768,10 +7860,14 @@ class AutoTestCopter(AutoTest):
         return ret
 
     def tests(self):
-        ret = []
-        ret.extend(self.tests1())
-        ret.extend(self.tests2())
-        return ret
+        #ret = []
+        #ret.extend(self.tests1())
+        #ret.extend(self.tests2())
+        return [
+            ("Rocking Drone Test",
+             "Test Fly Rocking Drone tests",
+             self.fly_rocking_drone),
+        ]
 
     def disabled_tests(self):
         return {

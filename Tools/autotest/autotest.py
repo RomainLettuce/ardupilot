@@ -678,14 +678,14 @@ def write_fullresults():
             glob = vehicle_glob[1].format(**subs)
             results.addglob(description, glob)
 
-    results.addglob("CopterAVC log", 'CopterAVC-*.BIN')
-    results.addfile("CopterAVC core", 'CopterAVC.core')
+    #results.addglob("CopterAVC log", 'CopterAVC-*.BIN')
+    #results.addfile("CopterAVC core", 'CopterAVC.core')
 
     results.addglob('APM:Libraries documentation', 'docs/libraries/index.html')
-    results.addglob('APM:Plane documentation', 'docs/ArduPlane/index.html')
+    #results.addglob('APM:Plane documentation', 'docs/ArduPlane/index.html')
     results.addglob('APM:Copter documentation', 'docs/ArduCopter/index.html')
-    results.addglob('APM:Rover documentation', 'docs/Rover/index.html')
-    results.addglob('APM:Sub documentation', 'docs/ArduSub/index.html')
+    #results.addglob('APM:Rover documentation', 'docs/Rover/index.html')
+    #results.addglob('APM:Sub documentation', 'docs/ArduSub/index.html')
     results.addglobimage("Flight Track", '*.png')
 
     write_webresults(results)
