@@ -1017,63 +1017,63 @@ if __name__ == "__main__":
             opts.timeout = None
 
     steps = [
-        'prerequisites',
-        'build.Binaries',
-        'build.All',
-        'build.Parameters',
+#        'prerequisites',
+#        'build.Binaries',
+#        'build.All',
+#        'build.Parameters',
 
-        'build.Replay',
+#        'build.Replay',
 
-        'build.unit_tests',
-        'run.unit_tests',
-        'build.examples',
-        'run.examples',
+#        'build.unit_tests',
+#        'run.unit_tests',
+#        'build.examples',
+#        'run.examples',
 
-        'build.Plane',
-        'defaults.Plane',
-        'test.Plane',
-        'test.QuadPlane',
+#        'build.Plane',
+#        'defaults.Plane',
+#        'test.Plane',
+#        'test.QuadPlane',
 
-        'build.Rover',
-        'defaults.Rover',
-        'test.Rover',
-        'test.BalanceBot',
-        'test.Sailboat',
+#        'build.Rover',
+#        'defaults.Rover',
+#        'test.Rover',
+#        'test.BalanceBot',
+#        'test.Sailboat',
 
-        'build.Copter',
-        'defaults.Copter',
+#        'build.Copter',
+#        'defaults.Copter',
         'test.Copter',
 
-        'build.Helicopter',
-        'test.Helicopter',
+#        'build.Helicopter',
+#        'test.Helicopter',
 
-        'build.Tracker',
-        'defaults.Tracker',
-        'test.Tracker',
+#        'build.Tracker',
+#        'defaults.Tracker',
+#        'test.Tracker',
 
-        'build.Sub',
-        'defaults.Sub',
-        'test.Sub',
+#        'build.Sub',
+#        'defaults.Sub',
+#        'test.Sub',
 
-        'build.SITLPeriphGPS',
-        'test.CAN',
+#        'build.SITLPeriphGPS',
+#        'test.CAN',
 
-        'convertgpx',
+#        'convertgpx',
     ]
 
     moresteps = [
-        'test.CopterTests1',
-        'test.CopterTests1a',
-        'test.CopterTests1b',
-        'test.CopterTests1c',
-        'test.CopterTests1d',
-        'test.CopterTests1e',
+#        'test.CopterTests1',
+#        'test.CopterTests1a',
+#        'test.CopterTests1b',
+#        'test.CopterTests1c',
+#        'test.CopterTests1d',
+#        'test.CopterTests1e',
 
-        'test.CopterTests2',
-        'test.CopterTests2a',
-        'test.CopterTests2b',
+#        'test.CopterTests2',
+#        'test.CopterTests2a',
+#        'test.CopterTests2b',
 
-        'clang-scan-build',
+#        'clang-scan-build',
     ]
 
     # canonicalise the step names.  This allows
