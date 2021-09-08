@@ -34,4 +34,10 @@ In my case, I added a subgroup to var_info2 by adding it to the table.
 
 Use a contents number that is not in use(in my case 5).
 
+2. Modify gyro value
 
+3. Add tests to arducopter.py
+
+4. Set essential/useless tests in autotest.py
+
+## Result
