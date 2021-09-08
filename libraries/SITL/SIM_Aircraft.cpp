@@ -306,23 +306,7 @@ void Aircraft::add_noise(float throttle)
     gyro += Vector3f(rand_normal(0, 1),
                      rand_normal(0, 1),
                      rand_normal(0, 1)) * gyro_noise * fabsf(throttle);
-    enum ap_var_type ptype;
-    attack_flag = (AP_Int8 *)AP_Param::find("RD_ATTACK", &ptype);
-    attack_freq_roll = (AP_Float *)AP_Param::find("RD_ATTACK_FREQ_ROLL", &ptype);
-    attack_freq_pitch = (AP_Float *)AP_Param::find("RD_ATTACK_FREQ_PITCH", &ptype);
-    attack_freq_yaw = (AP_Float *)AP_Param::find("RD_ATTACK_FREQ_YAW", &ptype);
-    attack_alt_roll = (AP_Float *)AP_Param::find("RD_ATTACK_ALT_ROLL", &ptype);
-    attack_alt_pitch = (AP_Float *)AP_Param::find("RD_ATTACK_ALT_PITCH", &ptype);
-    attack_alt_yaw = (AP_Float *)AP_Param::find("RD_ATTACK_ALT_YAW", &ptype);
-    if ((attack_flag != nullptr) && 
-    (attack_freq_roll != nullptr) && (attack_freq_pitch != nullptr) && (attack_freq_yaw != nullptr) &&
-    (attack_alt_roll != nullptr) && (attack_alt_pitch != nullptr) && (attack_alt_yaw != nullptr)) {
-        if (*attack_flag) {
-            gyro += Vector3f((*attack_alt_roll) * sin(2 * M_PI * (*attack_freq_roll) * frame_time_us),
-            (*attack_alt_pitch) * sin(2 * M_PI * (*attack_freq_pitch) * frame_time_us),
-            (*attack_alt_yaw) * sin(2 * M_PI * (*attack_freq_yaw) * frame_time_us))
-        }
-    }
+
     accel_body += Vector3f(rand_normal(0, 1),
                            rand_normal(0, 1),
                            rand_normal(0, 1)) * accel_noise * fabsf(throttle);
@@ -365,6 +349,14 @@ double Aircraft::rand_normal(double mean, double stddev)
 */
 void Aircraft::fill_fdm(struct sitl_fdm &fdm)
 {
+    static float times_m = 0.0;
+    /*static float times_pre = 0.0;
+    static float times_diff = 0.0; */
+
+    times_m = ((float)AP_HAL::millis()) / 1000.0;
+    /* times_diff = times_m - times_pre;
+    times_pre = times_m; */
+
     bool is_smoothed = false;
     if (use_smoothing) {
         smooth_sensors();
@@ -375,6 +367,23 @@ void Aircraft::fill_fdm(struct sitl_fdm &fdm)
         // initialise home
         fdm.home = home;
     }
+
+    if(sitl->attack_trigger == 1) 
+    {
+	    gyro.x += sitl->attack_amplitude_roll * sinf(2 * M_PI * times_m * sitl->attack_frequency_roll);
+	    gyro.y += sitl->attack_amplitude_pitch * sinf(2 * M_PI * times_m * sitl->attack_frequency_pitch);
+	    gyro.z += sitl->attack_amplitude_yaw * sinf(2 * M_PI * times_m * sitl->attack_frequency_yaw);
+	
+	/*printf("For Z axis) Attack signal \t%f at %f\t",sitl->attack_amplitude_yaw * sinf(2 * M_PI * times_m * sitl->attack_frequency_yaw), times_m);
+        printf("gyro.z: %f\n", gyro.z);
+	printf("time difference is %f\n", times_diff); */
+    }
+
+    /* if(sitl->attack_trigger == 1) {
+      for (int i = 1; i <= fdm.num_motors; i++)
+        printf("Motor %d's speed: %frpm\n", i, fdm.rpm[i-1]);
+    } */
+    
     fdm.is_lock_step_scheduled = lock_step_scheduled;
     fdm.latitude  = location.lat * 1.0e-7;
     fdm.longitude = location.lng * 1.0e-7;

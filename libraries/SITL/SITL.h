@@ -160,6 +160,7 @@ public:
     static const struct AP_Param::GroupInfo var_info[];
     static const struct AP_Param::GroupInfo var_info2[];
     static const struct AP_Param::GroupInfo var_info3[];
+    static const struct AP_Param::GroupInfo var_attack[];
     static const struct AP_Param::GroupInfo var_gps[];
     static const struct AP_Param::GroupInfo var_mag[];
     static const struct AP_Param::GroupInfo var_ins[];
@@ -242,6 +243,15 @@ public:
     AP_Int8 sfml_joystick_id;
     AP_Int8 sfml_joystick_axis[8];
 #endif
+
+    AP_Int8  attack_trigger;
+    AP_Float attack_frequency_roll; 
+    AP_Float attack_frequency_pitch;
+    AP_Float attack_frequency_yaw;
+    AP_Float attack_amplitude_roll;
+    AP_Float attack_amplitude_pitch;
+    AP_Float attack_amplitude_yaw;
+
 
     // baro parameters
     class BaroParm {

@@ -57,51 +57,6 @@ const AP_Param::Info Copter::var_info[] = {
     // @User: Advanced
     GSCALAR(sysid_my_gcs,   "SYSID_MYGCS",     255),
 
-    // @Param: RD_ATTACK
-    // @DisplayName: Status of Rocking-Drone attack
-    // @Description: Status of Rocking-Drone attack - 0(off) 1(on)
-    // @Value: 0 1
-    GSCALAR(rd_attack,  "RD_ATTACK",    0),
-
-    // @Param: RD_ATTACK_FREQ
-    // @DisplayName: Frequency of Rocking-Drone attack
-    // @Description: Frequency of Rocking-Drone attack (Hz)
-    // @Units: Hz
-    // @Range: 0 200
-    GSCALAR(rd_attack_freq_roll,  "RD_ATTACK_FREQ_ROLL",    0),
-
-    // @Param: RD_ATTACK_FREQ
-    // @DisplayName: Frequency of Rocking-Drone attack
-    // @Description: Frequency of Rocking-Drone attack (Hz)
-    // @Units: Hz
-    // @Range: 0 200
-    GSCALAR(rd_attack_freq_pitch,  "RD_ATTACK_FREQ_PITCH",    0),
-
-    // @Param: RD_ATTACK_FREQ
-    // @DisplayName: Frequency of Rocking-Drone attack
-    // @Description: Frequency of Rocking-Drone attack (Hz)
-    // @Units: Hz
-    // @Range: 0 200
-    GSCALAR(rd_attack_freq_yaw,  "RD_ATTACK_FREQ_YAW",    0),
-
-    // @Param: RD_ATTACK_ALT
-    // @DisplayName: Altitude of Rocking-Drone attack
-    // @Description: Altitude of Rocking-Drone attack
-    // @Range: 0 200
-    GSCALAR(rd_attack_alt_roll,  "RD_ATTACK_ALT_ROLL",    0),
-
-    // @Param: RD_ATTACK_ALT
-    // @DisplayName: Altitude of Rocking-Drone attack
-    // @Description: Altitude of Rocking-Drone attack
-    // @Range: 0 200
-    GSCALAR(rd_attack_alt_pitch,  "RD_ATTACK_ALT_PITCH",    0),
-
-    // @Param: RD_ATTACK_ALT
-    // @DisplayName: Altitude of Rocking-Drone attack
-    // @Description: Altitude of Rocking-Drone attack
-    // @Range: 0 200
-    GSCALAR(rd_attack_alt_yaw,  "RD_ATTACK_ALT_YAW",    0),
-
     // @Param: PILOT_THR_FILT
     // @DisplayName: Throttle filter cutoff
     // @Description: Throttle filter cutoff (Hz) - active whenever altitude control is inactive - 0 to disable

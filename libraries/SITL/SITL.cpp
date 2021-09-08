@@ -89,6 +89,8 @@ const AP_Param::GroupInfo SITL::var_info2[] = {
     AP_GROUPINFO("TEMP_TCONST",  3, SITL,  temp_tconst, 30),
     AP_GROUPINFO("TEMP_BFACTOR", 4, SITL,  temp_baro_factor, 0),
 
+    AP_SUBGROUPEXTENSION("",     5, SITL,  var_attack),
+
     AP_GROUPINFO("WIND_DIR_Z",  10, SITL,  wind_dir_z,     0),
     AP_GROUPINFO("WIND_T"      ,15, SITL,  wind_type, SITL::WIND_TYPE_SQRT),
     AP_GROUPINFO("WIND_T_ALT"  ,16, SITL,  wind_type_alt, 60),
@@ -173,6 +175,19 @@ const AP_Param::GroupInfo SITL::var_info2[] = {
 
     AP_GROUPEND
 
+};
+
+// Table of Rocking Drone Attack Parameters
+const AP_Param::GroupInfo SITL::var_attack[] = {
+    AP_GROUPINFO("ATTACK_TRG", 1, SITL, attack_trigger, 0),
+    AP_GROUPINFO("ATTACK_FRQ_R", 2, SITL, attack_frequency_roll,  1.0f),
+    AP_GROUPINFO("ATTACK_FRQ_P", 3, SITL,  attack_frequency_pitch,  1.0f),
+    AP_GROUPINFO("ATTACK_FRQ_Y", 4, SITL, attack_frequency_yaw,  1.0f),
+    AP_GROUPINFO("ATTACK_AMP_R", 5, SITL, attack_amplitude_roll,  0),
+    AP_GROUPINFO("ATTACK_AMP_P", 6, SITL,  attack_amplitude_pitch,  0),
+    AP_GROUPINFO("ATTACK_AMP_Y", 7, SITL, attack_amplitude_yaw,  0),
+
+    AP_GROUPEND
 };
 
 // third table of user settable parameters for SITL. 

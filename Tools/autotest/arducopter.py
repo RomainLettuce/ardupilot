@@ -158,67 +158,6 @@ class AutoTestCopter(AutoTest):
         self.hover()
         self.progress("TAKEOFF COMPLETE")
 
-    #def rd_attack_start(self):
-    #    self.progress("ROCKING DRONE ATTACK START")
-    #    self.set_parameter("RD_ATTACK", 1)
-
-    #def rd_attack_stop(self):
-    #    self.progress("ROCKING DRONE ATTACK STOP")
-    #    self.set_parameter("RD_ATTACK", 0)
-
-    #def rd_attack_get_freq_roll(self):
-    #    attack_freq = self.get_parameter("RD_ATTACK_FREQ_ROLL")
-    #    self.progress("CURRENT ROLL ATTACK FREQUENCY: %.2f" % attack_freq)
-
-    #def rd_attack_set_freq_roll(self, attack_freq):
-    #    self.set_parameter("RD_ATTACK_FREQ_ROLL", attack_freq)
-    #    current_freq = self.get_parameter("RD_ATTACK_FREQ_ROLL")
-    #    self.progress("CHANGED ROLL ATTACK FREQUENCY: %.2f" % current_freq)
-
-    #def rd_attack_get_freq_pitch(self):
-    #    attack_freq = self.get_parameter("RD_ATTACK_FREQ_PITCH")
-    #    self.progress("CURRENT PITCH ATTACK FREQUENCY: %.2f" % attack_freq)
-
-    #def rd_attack_set_freq_pitch(self, attack_freq):
-    #    self.set_parameter("RD_ATTACK_FREQ_PITCH", attack_freq)
-    #    current_freq = self.get_parameter("RD_ATTACK_FREQ_PITCH")
-    #    self.progress("CHANGED PITCH ATTACK FREQUENCY: %.2f" % current_freq)
-
-    #def rd_attack_get_freq_yaw(self):
-    #    attack_freq = self.get_parameter("RD_ATTACK_FREQ_YAW")
-    #    self.progress("CURRENT YAW ATTACK FREQUENCY: %.2f" % attack_freq)
-
-    #def rd_attack_set_freq_yaw(self, attack_freq):
-    #    self.set_parameter("RD_ATTACK_FREQ_YAW", attack_freq)
-    #    current_freq = self.get_parameter("RD_ATTACK_FREQ_YAW")
-    #    self.progress("CHANGED YAW ATTACK FREQUENCY: %.2f" % current_freq)
-
-    #def rd_attack_get_alt_roll(self):
-    #    attack_alt = self.get_parameter("RD_ATTACK_ALT_ROLL")
-    #    self.progress("CURRENT ROLL ATTACK ALTITUDE: %.2f" % attack_alt)
-
-    #def rd_attack_set_alt_roll(self, attack_alt):
-    #    self.set_parameter("RD_ATTACK_ALT_ROLL", attack_alt)
-    #    current_alt = self.get_parameter("RD_ATTACK_ALT_ROLL")
-    #    self.progress("CHANGED ROLL ATTACK ALTITUDE: %.2f" % current_alt)
-
-    #def rd_attack_get_alt_pitch(self):
-    #    attack_alt = self.get_parameter("RD_ATTACK_ALT_PITCH")
-    #    self.progress("CURRENT PITCH ATTACK ALTITUDE: %.2f" % attack_alt)
-
-    #def rd_attack_set_alt_pitch(self, attack_alt):
-    #    self.set_parameter("RD_ATTACK_ALT_PITCH", attack_alt)
-    #    current_alt = self.get_parameter("RD_ATTACK_ALT_PITCH")
-    #    self.progress("CHANGED PITCH ATTACK ALTITUDE: %.2f" % current_alt)
-
-    #def rd_attack_get_alt_yaw(self):
-    #    attack_alt = self.get_parameter("RD_ATTACK_ALT_YAW")
-    #    self.progress("CURRENT YAW ATTACK ALTITUDE: %.2f" % attack_alt)
-
-    #def rd_attack_set_alt_yaw(self, attack_alt):
-    #    self.set_parameter("RD_ATTACK_ALT_YAW", attack_alt)
-    #    current_alt = self.get_parameter("RD_ATTACK_ALT_YAW")
-    #    self.progress("CHANGED YAW ATTACK ALTITUDE: %.2f" % current_alt)
 
     def wait_for_alt(self, alt_min=30, timeout=30, max_err=5):
         """Wait for minimum altitude to be reached."""
@@ -6894,82 +6833,75 @@ class AutoTestCopter(AutoTest):
 
         return ret
 
-    def check_hover(self,
-                    timeout=600):
+    def fly_rocking_drone(self,
+                          timeout=200):
+        self.progress('Start Rocking Drone attack')
+
         tstart = self.get_sim_time()
         tflag = tstart
         last_status = 1
 
-        self.mavproxy.send('param set RD_ATTACK 1\n')
-
-        while self.get_sim_time_cached() < tstart + timeout:
-            if self.is_abnormal():
-                self.progress("Rocking Drone Attack Success")
-                return True
-            if (self.get_sim_time_cached() - tflag) % 10 == 0:
-                if last_status == 0:
-                    self.mavproxy.send('param set RD_ATTACK 1\n')
-                    last_status = 1
-                else:
-                    self.mavproxy.send('param set RD_ATTACK 0\n')
-                    last_status = 0
-        if last_status == 1:
-            self.mavproxy.send('param set RD_ATTACK 0\n')
-        return False
-
-    def fly_rocking_drone(self):
-        self.progress('Start Rocking Drone attack')
-
-        self.context_push()
-
-        res_fname = 'results/rocking_drone.txt'
-        out = open(res_fname, 'w')
-        wp_fname = 'CMAC-circuit.txt'
-        MAX_COUNT = 20
-        attack_amp = 0
+        attack_amp = 500
         attack_freq = 100
 
-        self.mavproxy.send('param set RD_ATTACK 0\n')
+        #self.mavproxy.send('param set SIM_ATTACK_TRG 0\n')
+        self.set_parameter("SIM_ATTACK_TRG", 0)
 
-        num_wp = self.load_mission(wp_fname)
+        self.assert_vehicle_location_is_at_startup_location()
 
-        for count in range(MAX_COUNT):
-            self.assert_vehicle_location_is_at_startup_location()
-
-            self.takeoff(40)
-            self.mavproxy.send('param set RD_ATTACK_ALT_YAW %f\n' % attack_amp)
-            self.mavproxy.send('param set RD_ATTACK_FREQ_YAW %f\n' % attack_freq)
+        self.takeoff(40)
+        self.hover()
+        #self.mavproxy.send('param set SIM_ATTACK_AMP_Y %f\n' % attack_amp)
+        #self.mavproxy.send('param set SIM_ATTACK_FRQ_Y %f\n' % attack_freq)
+        self.set_parameter("SIM_ATTACK_AMP_Y", attack_amp)
+        self.set_parameter("SIM_ATTACK_FRQ_Y", attack_freq)
             
-            crashed = self.check_hover()
+        self.set_parameter("SIM_ATTACK_TRG", 1)
+        while self.get_sim_time_cached() < tstart + timeout:
+		servo = self.mav.recv_match(type = 'SERVO_OUTPUT_RAW',
+                                             blocking=True)
+                self.progress("Rotor %d's speed: %d" % (1, servo.servo1_raw))
+		self.progress("Rotor %d's speed: %d" % (2, servo.servo2_raw))
+		self.progress("Rotor %d's speed: %d" % (3, servo.servo3_raw))
+		self.progress("Rotor %d's speed: %d" % (4, servo.servo4_raw))
+        
 
-            if crashed:
-                msg = 'Crashed at AMP: %f, FREQ: %f\n' % (attack_amp, attack_freq)
-                out.write(msg)
-                attack_amp += 20 
+        self.set_parameter("SIM_ATTACK_TRG", 0)
 
-            else:
-                msg = 'Not crashed at AMP: %f, FREQ: %f\n' % (attack_amp,
-                                                            attack_freq)
-                out.write(msg)
-                attack_amp += 20
-                if attack_amp > 200:
-                    attack_amp = 200
-                    attack_freq += 5.0#0.1
 
-            self.progress(msg)
-            #self.progress(msg, res_fname)
-            #attack_amp += 0.01
-            #if attack_amp > 0.15:
-            #    attack_freq += 0.1
+        self.zero_throttle()
 
-            self.zero_throttle()
-            self.disarm_vehicle(force=True)
-            self.mavproxy.send('param set SIM_ATTACK_TRG 0\n')
-            self.reboot_sitl()
-            if attack_freq > 200:
-                break
-        out.close()
-        self.progress("RVFuzzer test is done.")
+        # wait for disarm
+        self.wait_disarmed()
+        self.progress("MOTORS DISARMED OK")
+
+        self.progress("Rocking Drone test is done.")
+
+    def simple_hover_test(self,
+                          timeout=200):
+        self.progress('Start Simple Hover Test')
+
+        tstart = self.get_sim_time()
+        tflag = tstart
+
+        self.takeoff(40)
+        self.hover()
+
+        while self.get_sim_time_cached() < tstart + timeout:
+		servo = self.mav.recv_match(type = 'SERVO_OUTPUT_RAW',
+                                             blocking=True)
+                self.progress("Rotor %d's speed: %d" % (1, servo.servo1_raw))
+		self.progress("Rotor %d's speed: %d" % (2, servo.servo2_raw))
+		self.progress("Rotor %d's speed: %d" % (3, servo.servo3_raw))
+		self.progress("Rotor %d's speed: %d" % (4, servo.servo4_raw))
+
+        self.zero_throttle()
+
+        # wait for disarm
+        self.wait_disarmed()
+        self.progress("MOTORS DISARMED OK")
+
+        self.progress("Simple hover test is done.")
 
     def upload_simple_relhome_mission(self, items, target_system=1, target_component=1):
         mission = self.create_simple_relhome_mission(
@@ -7860,13 +7792,15 @@ class AutoTestCopter(AutoTest):
         return ret
 
     def tests(self):
-        #ret = []
         #ret.extend(self.tests1())
         #ret.extend(self.tests2())
         return [
             ("Rocking Drone Test",
              "Test Fly Rocking Drone tests",
              self.fly_rocking_drone),
+            ("Simple Hover Test",
+             "Test Rotor Value During Hovering",
+             self.simple_hover_test),
         ]
 
     def disabled_tests(self):

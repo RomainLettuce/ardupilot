@@ -393,14 +393,6 @@ public:
     AP_Int16        throttle_behavior;
     AP_Float        pilot_takeoff_alt;
 
-    AP_Int8         rd_attack;
-    AP_Float        rd_attack_freq_roll;
-    AP_Float        rd_attack_freq_pitch;
-    AP_Float        rd_attack_freq_yaw;
-    AP_Float        rd_attack_alt_roll;
-    AP_Float        rd_attack_alt_pitch;
-    AP_Float        rd_attack_alt_yaw;
-
 #if MODE_RTL_ENABLED == ENABLED
     AP_Int16        rtl_altitude;
     AP_Int16        rtl_speed_cms;

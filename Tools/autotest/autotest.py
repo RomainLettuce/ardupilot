@@ -1017,10 +1017,10 @@ if __name__ == "__main__":
             opts.timeout = None
 
     steps = [
-        'prerequisites',
-        'build.Binaries',
-        'build.All',
-        'build.Parameters',
+#        'prerequisites',
+#        'build.Binaries',
+#        'build.All',
+#        'build.Parameters',
 
 #        'build.Replay',
 
@@ -1040,8 +1040,8 @@ if __name__ == "__main__":
 #        'test.BalanceBot',
 #        'test.Sailboat',
 
-        'build.Copter',
-        'defaults.Copter',
+#        'build.Copter',
+#        'defaults.Copter',
         'test.Copter',
 
 #        'build.Helicopter',
