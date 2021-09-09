@@ -144,3 +144,12 @@ There are too many useless tests in autotest.py so, we should comment that tests
 You may need build tests if you didn't build binaray before. Please be sure that you have Arducopter binary file before you test.
 
 ## Result
+
+After you run autotest.py, the 'buildlogs' directory is created in your home directory.
+
+The two tests results are saved as txt file in this 'buildlogs' directory.
+
+I provided ```result_plot.py``` that plots the speed of all rotors in each test. Go to ```ardupilot/Tools/autotest``` and run ```result_plot.py``` to create the plot image in the 'buildlogs' directory.
+
+I repeated the experiment in various attack frequency/amplitude and followings are the result of each experiment.
+
