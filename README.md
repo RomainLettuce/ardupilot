@@ -143,6 +143,10 @@ There are too many useless tests in autotest.py so, we should comment that tests
 
 You may need build tests if you didn't build binaray before. Please be sure that you have Arducopter binary file before you test.
 
+Also, you have to change the contents of the tests function in the arducopter.py to test essential tests you want.
+
+![Alt text](image/test2.png)
+
 ## Result
 
 After you run autotest.py, the 'buildlogs' directory is created in your home directory.
@@ -153,3 +157,25 @@ I provided ```result_plot.py``` that plots the speed of all rotors in each test.
 
 I repeated the experiment in various attack frequency/amplitude and followings are the result of each experiment.
 
+![Alt text](image/result.png)
+
+(Attack Amplitude: 500, Attack Frequency: 100)
+
+In this experiment you can see that (rotor1 & rotor2) and (rotor3 & rotor4) have almost same value.
+
+
+![Alt text](image/result2.png)
+
+(Attack Amplitude: 1000, Attack Frequency: 400)
+
+![Alt text](image/result3.png)
+
+(Attack Amplitude: 1000, Attack Frequency: 200)
+
+![Alt text](image/result4.png)
+
+(Attack Amplitude: 1000, Attack Frequency: 200, line)
+
+![Alt text](image/result5.png)
+
+(Attack Amplitude: 2000, Attack Frequency: 100)
