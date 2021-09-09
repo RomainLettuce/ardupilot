@@ -139,6 +139,8 @@ You can freely change ```timeout```
 
 There are too many useless tests in autotest.py so, we should comment that tests to save time.
 
+![Alt text](image/test.png)
 
+You may need build tests if you didn't build binaray before. Please be sure that you have Arducopter binary file before you test.
 
 ## Result
