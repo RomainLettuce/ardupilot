@@ -34,6 +34,11 @@ In my case, I added a subgroup to var_info2 by adding it to the table.
 
 Use a contents number that is not in use(in my case 5).
 
+Finally, fill in the extended table with ```AP_GROUPINFO```
+The newly added params must be in the SITL group.
+
+![Alt text](/image/parameter.jpg)
+
 2. Modify gyro value
 
 3. Add tests to arducopter.py
